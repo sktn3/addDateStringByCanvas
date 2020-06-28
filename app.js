@@ -4,7 +4,7 @@
 const Banner = {
   font: 'bold 42px serif', // フォント
   fontcolor: 'red', // 文字色
-  text: getYMD(), // テキスト
+  text: getYMD(new Date()), // テキスト
 
   board: null,
   reader: null,
@@ -17,8 +17,7 @@ const Banner = {
   }
 }
 
-function getYMD(){
-    const d = new Date();
+function getYMD(d){
     return d.getFullYear() + "/" +
         (d.getMonth()+1) + "/" + 
         d.getDate();
@@ -43,6 +42,12 @@ window.onload = function(e){
         let canvas = Banner.board;
         let ctx = Banner.canvas.ctx;
         let reader = new FileReader();
+
+        // EXIF.getDataでexif情報を解析
+        EXIF.getData(e.target.files[0], function() {
+            Banner.text = (EXIF.getTag(this, "DateTimeOriginal")).split(" ")[0].replace(/:/g,"/");
+        });
+
         reader.onload = function(event) {
             let img = new Image();
             img.onload = function() {
@@ -56,6 +61,7 @@ window.onload = function(e){
                 ctx.font = Banner.font;
                 ctx.fillStyle = Banner.fontcolor;
                 ctx.fillText(Banner.text, canvas.width-300, 40, canvas.width);
+
             }
             img.src = event.target.result;
         }
