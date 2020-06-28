@@ -1,16 +1,48 @@
+
+body{
+  -webkit-text-size-adjust: 100%;
+}
+
+#msg{
+  font-size: max(1em,1.5vh);
+  color: red;
+  font-weight: bolder;
+}
+
 #container{
   display: flex;
   width: 900px;
   justify-content: space-between; /* 左右は端、残りは均等揃え */
 }
 
-#preview{
+label > input {
+  display:none; /* アップロードボタンのスタイルを無効にする */
+}
+label {
+  font-size: max(1em,1.5vh);
+  color: #fff; /* ラベルテキストの色を指定する */
+  background-color: #006DD9;/* ラベルの背景色を指定する */
+  padding: 10px; /* ラベルとテキスト間の余白を指定する */
+  border: double 4px #AAAAAA;/* ラベルのボーダーを指定する */
+}
+/*
+input[type="file"]{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-box-sizing: content-box;
+
+}
+*/
+
+#view{
   width:450px;
 }
 
-#img{
+img{
   border: 1px solid blue;
   z-index: solid;
+  zoom: 0.4;
 }
 
 #board{
