@@ -39,9 +39,10 @@ window.onload = function(e){
   Banner.board = board;
 
     document.getElementById("file").addEventListener('change', function(e){
-        let canvas = Banner.board;
-        let ctx = Banner.canvas.ctx;
-        let reader = new FileReader();
+        const canvas = Banner.board;
+        const ctx = Banner.canvas.ctx;
+        const reader = new FileReader();
+        const img = document.getElementById("img");
 
         // EXIF.getDataでexif情報を解析
         EXIF.getData(e.target.files[0], function() {
@@ -49,21 +50,23 @@ window.onload = function(e){
         });
 
         reader.onload = function(event) {
-            let img = new Image();
-            img.onload = function() {
-                canvas.width  = img.naturalWidth;
-                canvas.height = img.naturalHeight;
+            let image = new Image();
+            image.onload = function() {
+                canvas.width  = image.naturalWidth;
+                canvas.height = image.naturalHeight;
 
                 // 画像を表示
-                ctx.drawImage(img, 0, 0);
+                ctx.drawImage(image, 0, 0);
 
                 // 文字を描画
                 ctx.font = Banner.font;
                 ctx.fillStyle = Banner.fontcolor;
                 ctx.fillText(Banner.text, canvas.width-300, 40, canvas.width);
 
+                img.src = canvas.toDataURL();
+                canvas.style.display = "none";
             }
-            img.src = event.target.result;
+            image.src = event.target.result;
         }
         reader.readAsDataURL(e.target.files[0]);
 

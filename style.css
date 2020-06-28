@@ -8,49 +8,13 @@
   width:450px;
 }
 
-#arrow{
-  display: flex;
-  width: 50px;
-  height: 300px;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-}
-
-#arrow > div{
-  width: 50px;
-  height: 50px;
-}
-
-#savelist{
-  width: 400px;
+#img{
+  border: 1px solid blue;
+  z-index: solid;
 }
 
 #board{
   border: 1px solid gray;
 }
 
-#txt-message{
-  width: 345px;
-  height: 30px;
-  font-size: 18px;
-  margin: 10px 0px; /* 上下, 左右 */
-}
 
-#btn-send{
-  width: 345px;
-  height: 30px;
-}
-
-#result{
-  list-style-type: none;
-  padding: 10px;
-  width: 355px;
-  height:400px;
-  border: 1px dotted gray;
-  overflow-y: scroll;
-}
-
-.saveimage{
-  border: 1px solid gray;
-}
