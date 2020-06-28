@@ -29,8 +29,9 @@ window.onload = function(e){
 
     document.getElementById("file").addEventListener('change', function(e){
 
+        document.querySelector('#view').innerHTML = "";
         const files = e.target.files;
-        console.log("file num: "+files.length);
+        msg(files.length+"枚");
         let readers = new Array();
         let dateStrs = new Array();
 
