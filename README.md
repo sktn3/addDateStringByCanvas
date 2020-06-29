@@ -6,4 +6,4 @@
 
 # リンク
 
-(https://sktn3.github.io/addDateStringToPhotoByCanvas/index.html)
+https://sktn3.github.io/addDateStringToPhotoByCanvas/index.html
