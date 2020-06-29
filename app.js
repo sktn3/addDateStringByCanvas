@@ -3,18 +3,11 @@
 // 定数定義
 
 
-// オブジェクト
-const Font = {
-  font: 'bold {{}}px serif', // フォント
-  fontcolor: 'red' // 文字色
-}
-
 function getYMD(d){
-    return d.getFullYear() + "/" +
-        (d.getMonth()+1) + "/" + 
-        d.getDate();
-        //d.getDate() + "," + 
-        //[ "日", "月", "火", "水", "木", "金", "土" ][d.getDay()] ;    // 曜日(日本語表記)
+    return d.getFullYear() + "." +
+        (d.getMonth()+1) + "." + 
+        d.getDate() + " " + 
+        [ "日", "月", "火", "水", "木", "金", "土" ][d.getDay()] ;    // 曜日(日本語表記)
 }
 
 function msg(str){
@@ -40,7 +33,8 @@ window.onload = function(e){
             EXIF.getData(files[i], function() {
                 const date = EXIF.getTag(this, "DateTimeOriginal");
                 if(date){
-                    dateStrs.push( date.split(" ")[0].replace(/:/g,"/"));
+                    //dateStrs.push( date.split(" ")[0].replace(/:/g,"/"));
+                    dateStrs.push( getYMD(new Date(date.split(" ")[0].replace(/:/g,"/"))));
                     console.log(dateStrs[i]);
                 }else{
                     msg("Exif情報がありません。本日の日付を入れます");
@@ -73,11 +67,16 @@ window.onload = function(e){
                     canvases[i].ctx.drawImage(image, 0, 0);
 
                     // 文字を描画
-                    const fontSize = Math.round(canvases[i].height/24)
-                    const strH = Math.round(fontSize*1.3);
-                    canvases[i].ctx.font = Font.font.replace("{{}}",fontSize);
-                    canvases[i].ctx.fillStyle = Font.fontcolor;
-                    canvases[i].ctx.fillText(dateStrs[i], 40, strH, canvases[i].width);
+                    const fontSize = Math.round(canvases[i].height/18)
+                    canvases[i].ctx.font = 'bold '+fontSize+'px serif'; // フォント
+                    canvases[i].ctx.textAlign = "left";
+                    canvases[i].ctx.textBaseline = "top";
+                    canvases[i].ctx.strokeStyle = "white";
+                    canvases[i].ctx.lineWidth = 12;
+                    canvases[i].ctx.strokeText(dateStrs[i], 20, 20, canvases[i].width);
+
+                    canvases[i].ctx.fillStyle = "black";
+                    canvases[i].ctx.fillText(dateStrs[i], 20, 20, canvases[i].width);
 
                     imgs[i].src = canvases[i].toDataURL("image/jpeg");
                     canvases[i].style.display = "none";
