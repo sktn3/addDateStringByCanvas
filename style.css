@@ -37,7 +37,7 @@ label {
 img{
   border: 1px solid blue;
   z-index: solid;
-  zoom: 0.4;
+  zoom: 0.3;
   display: block;
   margin: 5px;
 }
